@@ -15,7 +15,6 @@ import { useStateValue } from './StateProvider';
 
 function Chat() {
   const [input, setinput] = useState('');
-  const [seed, setSeed] = useState('');
   const { roomId } = useParams();
   const [roomName, setRoomName] = useState('');
   const [messages, setMessages] = useState([]);
@@ -35,11 +34,6 @@ function Chat() {
           setMessages(snapshot.docs.map(doc => doc.data())),
         );
     }
-    // setSeed(roomId);
-  }, [roomId]);
-
-  useEffect(() => {
-    setSeed(Math.floor(Math.random() * 5000));
   }, [roomId]);
 
   const sendMessage = e => {
@@ -54,19 +48,15 @@ function Chat() {
   return (
     <div className='chat'>
       <div className='chat__header'>
-        <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
+        <Avatar src={`https://avatars.dicebear.com/api/human/${roomId}.svg`} />
 
         <div className='chat__headerInfo'>
           <h3>{roomName}</h3>
           <p>
-            Last seen{' '}
-            {/* {
-              new Date(
-                messages[messages.length - 1]?.timestamp
-                  ?.toDate()
-                  .toUTCString(),
-              )
-            } */}
+            Last seen
+            {new Date(
+              messages[messages.length - 1]?.timestamp?.toDate(),
+            ).toUTCString()}
           </p>
         </div>
         <div className='chat__headerRight'>
