@@ -9,7 +9,7 @@ function Login() {
   const [, dispatch] = useStateValue();
   const signIn = () => {
     auth
-      .signInWithPopup(provider)
+      .signInWithPopup(provider) //provider is Google
       .then(result => {
         dispatch({
           type: actionTypes.SET_USER,
